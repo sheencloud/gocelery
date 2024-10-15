@@ -12,6 +12,12 @@ import (
 	"github.com/gomodule/redigo/redis"
 )
 
+// RedisCeleryBroker is celery broker for redis
+type RedisCeleryBroker struct {
+	*redis.Pool
+	QueueName string
+}
+
 // NewRedisBroker creates new RedisCeleryBroker with given redis connection pool
 func NewRedisBroker(conn *redis.Pool, queueName string) *RedisCeleryBroker {
 	return &RedisCeleryBroker{
@@ -28,17 +34,6 @@ func NewRedisCeleryBroker(uri string, queueName string) *RedisCeleryBroker {
 	return &RedisCeleryBroker{
 		Pool:      NewRedisPool(uri),
 		QueueName: queueName,
-	}
-}
-
-// NewRedisCeleryBroker creates new RedisCeleryBroker based on given uri
-//
-// Deprecated: NewRedisCeleryBroker exists for historical compatibility
-// and should not be used. Use NewRedisBroker instead to create new RedisCeleryBroker.
-func NewRedisCeleryBroker(uri string) *RedisCeleryBroker {
-	return &RedisCeleryBroker{
-		Pool:      NewRedisPool(uri),
-		QueueName: "celery",
 	}
 }
 
