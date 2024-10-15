@@ -1,4 +1,4 @@
-module github.com/gocelery/gocelery
+module github.com/sheencloud/gocelery
 
 go 1.13
 
